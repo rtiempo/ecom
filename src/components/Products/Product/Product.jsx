@@ -1,30 +1,26 @@
-import React from 'react'
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
-import { AddShoppingCart } from '@material-ui/icons';
+import React from 'react';
+import { Card, CardMedia, CardContent, Typography, Box } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
 
-const Product = ({ product, onAddToCart }) => {
+const Product = ({ product }) => {
     const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
-            <CardMedia className={classes.media} image={product.media.source} title={product.name} />
-            <CardContent>
-                <Typography variant="h5" gutterBottom>
-                    {product.name}
-                </Typography>
-                <Typography variant="h5" color="secondary" gutterBottom>
+        <Box height={ 432 } boxShadow={0} >
+            <Card className={classes.root} align="left" component={Link} to={{ pathname: "/productPage", state: { productId: product.id } }} style={{ textDecoration: 'none' }}>
+                <CardMedia className={classes.media} image={product.media.source} title={product.name} />
+                <CardContent style={{ padding: 0, paddingTop: "10px" }} >
+                    <Typography align="left" variant="h6" gutterBottom>
+                        {product.name}
+                    </Typography>                    
+                </CardContent>                       
+                <Typography style={{  }} align="left" variant="h6" color="secondary" gutterBottom>
                     {product.price.formatted_with_symbol}
                 </Typography>
-                <Typography dangerouslySetInnerHTML={{ __html: product.description }} variant="body2" color="textSecondary" />
-            </CardContent>
-            <CardActions disableSpacing className={classes.cardActions}>
-                <IconButton aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>
-                    <AddShoppingCart />
-                </IconButton>
-            </CardActions>
-        </Card>
+            </Card>
+        </Box>
     )
 }
 

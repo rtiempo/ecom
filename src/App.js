@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { commerce } from './lib/commerce';
-import { Products, Navbar, Cart, Checkout } from './components';
+import { Products, Navbar, Cart, Checkout, ProductPage } from './components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
@@ -73,7 +73,7 @@ const App = () => {
                 <Navbar totalItems={cart.total_items} />
                 <Switch>
                     <Route exact path="/">
-                        <Products products={products} onAddToCart={handleAddToCart} />
+                        <Products products={products} />
                     </Route>
                     <Route exact path="/cart">
                         <Cart 
@@ -91,6 +91,9 @@ const App = () => {
                             error={errorMessage}
                             refreshCart={refreshCart}
                         />
+                    </Route>
+                    <Route exact path="/productPage">
+                        <ProductPage onAddToCart={handleAddToCart} />
                     </Route>
                 </Switch>
             </div>
